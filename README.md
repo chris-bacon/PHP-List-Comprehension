@@ -12,6 +12,10 @@ Which can be read as: _the set of all xs, such that x is drawn from the list ran
 
 The current predicates supported are equality, greater than, less than, division, and modulo artithmetic.
 
+## Usage
+
+Simply include `lc.php` and then use the lc procedure.
+
 ## Examples
 
 `lc("[x | x <- [1..5]]")`
