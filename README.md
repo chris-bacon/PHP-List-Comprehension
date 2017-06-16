@@ -6,9 +6,11 @@ The syntax for the comprehension is as follows:
 
 `[x | x <- [n..m], predicate]`
 
-Which can be read as: _the set/list of all xs, such that x is drawn from the list ranging from n to m, and which satisfy the predicate_. The predicate is optional.
+Which can be read as: _the set of all xs, such that x is drawn from the list ranging from n to m, and which satisfy the predicate_. The predicate is optional, allowing simple list creation.
 
-The current predicates supported are equality, greater than, less than, division, and modulo artithmetic. 
+`[x | x <- [n..m]`
+
+The current predicates supported are equality, greater than, less than, division, and modulo artithmetic.
 
 ## Examples
 
