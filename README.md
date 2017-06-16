@@ -8,7 +8,7 @@ The syntax for the comprehension is as follows:
 
 Which can be read as: _the set of all xs, such that x is drawn from the list ranging from n to m, and which satisfy the predicate_. The predicate is optional, allowing simple list creation.
 
-`[x | x <- [n..m]`
+`[x | x <- [n..m]]`
 
 The current predicates supported are equality, greater than, less than, division, and modulo artithmetic.
 
