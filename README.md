@@ -8,6 +8,8 @@ The syntax for the comprehension is as follows:
 
 Which can be read as: _the set/list of all xs, such that x is drawn from the list ranging from n to m, and which satisfy the predicate_. The predicate is optional.
 
+The current predicates supported are equality, greater than, less than, division, and modulo artithmetic. 
+
 ## Examples
 
 `lc("[x | x <- [1..5]]")`
