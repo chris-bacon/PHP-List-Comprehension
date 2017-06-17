@@ -10,7 +10,7 @@ Which can be read as: _the set of all xs, such that x is drawn from the list ran
 
 `[x | x <- [n..m]]`
 
-The current predicates supported are equality, greater than, less than, division, and modulo artithmetic.
+The current predicates/operations supported are equality, greater than, less than, division, addition, subtraction and modulo artithmetic.
 
 ## Usage
 
@@ -29,3 +29,6 @@ Simply include `lc.php` and then use the lc procedure.
 
 `lc("[x | x <- [1..5], x <= 2]")`
 > [1, 2]
+
+`lc("[x | x <- [20..22], x + 1]")`
+> [21, 22, 23]

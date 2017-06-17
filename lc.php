@@ -7,46 +7,47 @@
  */
 function lc(String $str)
 {
+    $error = [];
     preg_match("/\[[a-z]\s\|\s[a-z]\s<-\s\[([0-9]+)..([0-9]+)\],?(.+)?\]/", $str, $matches);
     $r = range($matches[1], $matches[2]);
     $filter = isset($matches[3]) ? $matches[3] : null;
     if ($filter) {
-        preg_match("/\w\s([>|<|=|%|\/]+)\s(\d+)/", $filter, $matches);
+        preg_match("/\w\s([\+|\-|>|<|=|%|\/]+)\s(\d+)/", $filter, $matches);
         $op = isset($matches[1]) ? $matches[1] : null;
-        $filterCond = (int) $matches[2];
+        $filterCond = isset($matches[2]) ? (int) $matches[2] : null;
 
         if (!$op) {
-            return "Error: Operator empty";
+            $error[] = "Operator empty";
         }
 
         if (!$filterCond) {
-            return "Error: Predicate condition not appropriate.";
+            $error[] = "Predicate condition not appropriate";
         }
 
         switch ($op) {
             case '<':
                 $r = array_filter($r, function ($x) use ($filterCond) {
-                    return $x <  $filterCond;
+                    return $x <  (int) $filterCond;
                 });
                 break;
             case '==':
                 $r = array_filter($r, function ($x) use ($filterCond) {
-                    return $x == $filterCond;
+                    return $x == (int) $filterCond;
                 });
                 break;
             case '>':
                 $r = array_filter($r, function ($x) use ($filterCond) {
-                    return $x > $filterCond;
+                    return $x > (int) $filterCond;
                 });
                 break;
             case '%':
                 $r = array_filter($r, function ($x) use ($filterCond) {
-                    return $x % $filterCond;
+                    return $x % (int) $filterCond;
                 });
                 break;
             case '<=':
                 $r = array_filter($r, function ($x) use ($filterCond) {
-                    return $x <= $filterCond;
+                    return $x <= (int) $filterCond;
                 });
                 break;
             case '>=':
@@ -55,15 +56,30 @@ function lc(String $str)
                 });
                 break;
             case '/':
-                $r = array_filter($r, function ($x) use ($filterCond) {
+                $r = array_map(function ($x) use ($filterCond) {
                     return $x / (int) $filterCond;
-                });
+                }, $r);
+                break;
+            case '+':
+                $r = array_map(function ($x) use ($filterCond) {
+                    return $x + (int) $filterCond;
+                }, $r);
+                break;
+            case '-':
+                $r = array_map(function ($x) use ($filterCond) {
+                    return $x - (int) $filterCond;
+                }, $r);
                 break;
             default:
-                $r = "Operator not allowed";
+                $error[] = "Operator not allowed";
                 break;
         }
     }
+
+    if ($error) {
+        return $error;
+    }
+
     // Reindex
     $retArr = [];
     foreach ($r as $value) {
