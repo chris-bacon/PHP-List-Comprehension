@@ -41,9 +41,9 @@ function lc(String $str)
                 });
                 break;
             case '%':
-                $r = array_filter($r, function ($x) use ($filterCond) {
+                $r = array_map(function ($x) use ($filterCond) {
                     return $x % (int) $filterCond;
-                });
+                }, $r);
                 break;
             case '<=':
                 $r = array_filter($r, function ($x) use ($filterCond) {
