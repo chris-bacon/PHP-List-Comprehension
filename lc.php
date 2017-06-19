@@ -12,7 +12,7 @@ function lc(String $str)
     $r = range($matches[1], $matches[2]);
     $filter = isset($matches[3]) ? $matches[3] : null;
     if ($filter) {
-        preg_match("/\w\s([\+|\-|>|<|=|%|\/]+)\s(\d+)/", $filter, $matches);
+        preg_match("/\w\s([\+|\-|>|<|=|%|\/|mod]+)\s(\d+)/", $filter, $matches);
         $op = isset($matches[1]) ? $matches[1] : null;
         $filterCond = isset($matches[2]) ? (int) $matches[2] : null;
 
@@ -41,6 +41,11 @@ function lc(String $str)
                 });
                 break;
             case '%':
+                $r = array_map(function ($x) use ($filterCond) {
+                    return $x % (int) $filterCond;
+                }, $r);
+                break;
+            case 'mod':
                 $r = array_map(function ($x) use ($filterCond) {
                     return $x % (int) $filterCond;
                 }, $r);

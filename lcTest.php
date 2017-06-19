@@ -22,7 +22,7 @@ class LCTest extends TestCase
             "[x | x <- [10..12], x - 1]" => [9, 10, 11],
             "[x | x <- [2..4], x / 2]" => [1, 1.5, 2],
             "[x | x <- [2..4], x % 2]" => [0, 1, 0],
-            "[x | x <- [1..10], x mod 2]" => ["Operator empty", "Predicate condition not appropriate", "Operator not allowed"]
+            "[x | x <- [8..10], x mod 2]" => [0, 1, 0]
         ];
         foreach ($expected as $inputVal => $e) {
             $this->assertEquals($e, lc($inputVal));
